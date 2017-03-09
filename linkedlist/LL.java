@@ -1,19 +1,49 @@
 package linkedlist;
 
+import java.util.Iterator;
+
 /**
  * A generic Linked List (LL) implemented in Java
  * @author Brian Hillsley
  *
  * @param <T>
  */
-public class LL<T> {
+public class LL<T> implements Iterable<T> {
 	public static class EmptyLLException extends Exception {}
+
+	private class LLIterator<A> implements Iterator<A>{
+	LLNode<A> head;
+	LLNode<A> ptr;
+	public LLIterator(LLNode<A> head) {
+		this.head = head;
+		ptr = this.head;
+	}
+
+	@Override
+	public boolean hasNext() {
+		if(ptr!=null){
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public A next() {
+		LLNode<A> retNode = ptr;
+		if(ptr.next!=null)
+			ptr = ptr.next;
+		else 
+			ptr = null;
+		return retNode.data;
+	}
+	
+}
 
 	LLNode<T> head;
 	LLNode<T> tail;
 	int size = 0;
 	
-	public LL(LLNode head){
+	public LL(LLNode<T> head) {
 		this.head = head;
 		LLNode<T> ptr = head;
 		size = 1;
@@ -23,13 +53,17 @@ public class LL<T> {
 		}
 		this.tail = ptr; // set tail 
 	}
+	public LL(){
+		this.head = null;
+		this.tail = null;
+	}
 
 	/**
 	 * Adding a single element by its data value
 	 * @param data
 	 */
 	public void add(T data){
-		LLNode newTail = new LLNode(data);
+		LLNode<T> newTail = new LLNode<T>(data);
 		if(tail!=null){
 			tail.next = newTail;
 			tail = newTail;
@@ -68,5 +102,10 @@ public class LL<T> {
 	}
 	public String toString(){
 		return "Head:"+head+", Tail:"+tail+", Size:"+size;
+	}
+	
+	@Override
+	public Iterator<T> iterator() {
+		return new LLIterator<T>(head);
 	}
 }

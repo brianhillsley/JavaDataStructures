@@ -1,10 +1,10 @@
 package linkedlist;
 
 public class LLNode<T> {
-	LLNode(T data){
+	public LLNode(T data){
 		this.data=data;
 	}
-	LLNode next;
+	LLNode<T> next;
 	T data;
 	public String toString(){
 		return ""+data.toString();

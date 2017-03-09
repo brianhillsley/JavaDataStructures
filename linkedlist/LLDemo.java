@@ -35,6 +35,10 @@ public class LLDemo {
 
 		System.out.println(intLL);
 
+		// Showcase its iterator
+		for(int a: intLL){
+			System.out.println(a);
+		}
 
 	}
 }
