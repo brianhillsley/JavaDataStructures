@@ -24,6 +24,6 @@ public class GNode<J> {
 		return false;
 	}
 	public int hashCode(){
-		return (id+"~"+data).hashCode();	
+		return (id+"-"+data).hashCode();	
 	}
 }
